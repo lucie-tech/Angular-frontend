@@ -1,0 +1,427 @@
+<!-- Full Homepage Component -->
+<main class="homepage">
+
+  <!-- 1. HERO SECTION -->
+  <section id="hero" class="section-hero">
+    <div class="hero-bg-shape"></div>
+    <div class="hero-bg-dot dot-large"></div>
+    <div class="hero-bg-dot dot-small"></div>
+
+    <div class="hero-main-row">
+
+      <!-- LEFT SIDE - STATIC CONTENT (Never changes) -->
+      <div class="hero-left">
+        <span class="hero-eyebrow">Clinical Nutraceuticals · Tanzania</span>
+        <h1 class="hero-headline">
+          Transforming Nutrition<br />
+          into <em>Clinical Therapy</em>
+        </h1>
+        <p class="hero-sub">
+          Nutriomedics develops evidence-based nutraceuticals and medical nutrition solutions
+          designed to improve outcomes for patients with diabetes, kidney disease, cardiovascular
+          disease, and other chronic conditions.
+        </p>
+        <div class="hero-actions">
+          <a routerLink="/products" class="btn-primary" (click)="navigateToProducts($event)">
+            Explore Our Products
+          </a>
+          <a routerLink="/contact" class="btn-secondary" (click)="navigateToContact($event)">
+            Partner With Us
+          </a>
+        </div>
+        <div class="trust-indicators">
+          <span class="trust-badge">✓ Clinician‑Led Innovation</span>
+          <span class="trust-badge">✓ Evidence‑Based Formulations</span>
+          <span class="trust-badge">✓ Made for African Healthcare Systems</span>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE - DYNAMIC CAROUSEL (Only this changes from database) -->
+      <div class="hero-animation">
+        <!-- Loading State -->
+        <div *ngIf="loading" class="hero-loading">
+          <div class="spinner"></div>
+        </div>
+
+        <!-- Error State -->
+        <div *ngIf="!loading && error" class="hero-error">
+          <p>{{ errorMessage }}</p>
+          <button class="retry-btn" (click)="retryLoad()">Retry</button>
+        </div>
+
+        <!-- Dynamic Carousel - NO BUTTONS inside slides -->
+        <div *ngIf="!loading && !error && carouselSlides.length > 0" class="carousel-container">
+          <div class="carousel-viewport">
+            @for (slide of carouselSlides; track slide.title; let i = $index) {
+            <div class="carousel-slide" [class.active]="i === activeSlide" [class.exit]="i === exitSlide">
+              <div class="slide-text">
+                <span class="slide-tag">{{ slide.tag }}</span>
+                <h3 class="slide-title">{{ slide.title }}</h3>
+                <p class="slide-desc">{{ slide.desc }}</p>
+              </div>
+              <div class="slide-image">
+                <img [src]="slide.image" [alt]="slide.title" />
+                <div class="image-overlay"></div>
+              </div>
+            </div>
+            }
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="carousel-progress">
+            <div class="carousel-progress-fill" [style.width.%]="progressWidth"></div>
+          </div>
+
+          <!-- Controls -->
+          <div class="carousel-controls">
+            <button class="carousel-btn prev-btn" (click)="prevSlide()" aria-label="Previous">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="carousel-dots">
+              @for (slide of carouselSlides; track slide.title; let i = $index) {
+              <button class="dot" [class.active]="i === activeSlide" (click)="goToSlide(i)"></button>
+              }
+            </div>
+            <span class="slide-counter">{{ activeSlide + 1 }} / {{ carouselSlides.length }}</span>
+            <button class="carousel-btn next-btn" (click)="nextSlide()" aria-label="Next">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. THE PROBLEM WE SOLVE -->
+  <section id="problem" class="section-problem">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">The Challenge</span>
+        <h2 class="section-title">The Problem We Solve</h2>
+        <div class="title-divider center"></div>
+      </div>
+      <div class="problem-stats">
+        <div class="stat-card">
+          <div class="stat-number">2.5M+</div>
+          <div class="stat-label">People with Diabetes in Tanzania</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">15%</div>
+          <div class="stat-label">Population affected by CKD</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">70%</div>
+          <div class="stat-label">Lack access to therapeutic nutrition</div>
+        </div>
+      </div>
+      <p class="problem-description">
+        Non‑communicable diseases such as diabetes, chronic kidney disease, cardiovascular disease,
+        and cancer are rising rapidly across Africa. Many patients lack access to clinically designed
+        therapeutic nutrition that supports medical treatment and improves recovery.
+      </p>
+      <div class="problem-highlight">
+        <strong>Nutriomedics addresses this gap</strong> by developing scientifically formulated
+        nutraceutical solutions that complement clinical care.
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. OUR SOLUTION -->
+  <section id="solution" class="section-solution">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">Our Approach</span>
+        <h2 class="section-title">Our Solution</h2>
+        <div class="title-divider center"></div>
+      </div>
+      <p class="solution-intro">
+        Nutriomedics integrates clinical medicine, nutrition science, and research innovation to develop
+        therapeutic nutrition products that help patients manage chronic diseases more effectively.
+      </p>
+      <div class="solution-grid">
+        <div class="solution-card">
+          <div class="solution-icon">🩺</div>
+          <h3>Improving Metabolic Control</h3>
+          <p>Evidence-based formulations that help regulate blood glucose and metabolic parameters.</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-icon">❤️</div>
+          <h3>Supporting Organ Health</h3>
+          <p>Targeted nutrition to protect and support kidney, heart, and liver function.</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-icon">📈</div>
+          <h3>Enhancing Patient Recovery</h3>
+          <p>Accelerated recovery through optimized nutritional support during treatment.</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-icon">🛡️</div>
+          <h3>Reducing Complications</h3>
+          <p>Minimizing disease-related complications through proactive nutrition therapy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. FEATURED INNOVATION – DIAB PRO -->
+  <section id="featured" class="section-featured">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">Flagship Innovation</span>
+        <h2 class="section-title">Diab Pro</h2>
+        <div class="title-divider center"></div>
+      </div>
+      <div class="featured-wrapper">
+        <div class="featured-content">
+          <p class="featured-description">
+            Diab Pro is Nutriomedics' flagship nutraceutical formula designed to support glycaemic control
+            and metabolic balance for individuals living with diabetes and metabolic disorders.
+          </p>
+          <div class="featured-list">
+            <div class="featured-item">
+              <span class="check">✓</span>
+              <span>Supports blood glucose stability</span>
+            </div>
+            <div class="featured-item">
+              <span class="check">✓</span>
+              <span>Designed using clinical nutrition principles</span>
+            </div>
+            <div class="featured-item">
+              <span class="check">✓</span>
+              <span>Intended for integration into medical nutrition therapy</span>
+            </div>
+          </div>
+          <button class="btn-featured" (click)="navigateToProducts($event)">
+            Learn More About Diab Pro
+          </button>
+        </div>
+        <div class="featured-image">
+          <img src="assets/images/product1.jpg" alt="Diab Pro Product" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. OUR RESEARCH AND INNOVATION -->
+  <section id="research" class="section-research">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">Science & Development</span>
+        <h2 class="section-title">Our Research and Innovation</h2>
+        <div class="title-divider center"></div>
+      </div>
+      <p class="research-intro">
+        Nutriomedics works with clinicians, universities, and healthcare institutions to develop
+        and validate therapeutic nutrition products.
+      </p>
+      <div class="research-areas">
+        <div class="research-card">
+          <div class="research-icon">🔬</div>
+          <h3>Diabetes Metabolic Nutrition</h3>
+          <p>Clinical research on nutritional interventions for diabetes management.</p>
+        </div>
+        <div class="research-card">
+          <div class="research-icon">🫘</div>
+          <h3>Kidney Disease Supportive Nutrition</h3>
+          <p>Specialized formulas for CKD patients at various stages.</p>
+        </div>
+        <div class="research-card">
+          <div class="research-icon">🎗️</div>
+          <h3>Oncology Supportive Nutrition</h3>
+          <p>Nutritional support for cancer patients during treatment.</p>
+        </div>
+        <div class="research-card">
+          <div class="research-icon">🌾</div>
+          <h3>Functional Ingredients from Local Foods</h3>
+          <p>Harnessing African indigenous foods for therapeutic benefits.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. WHO WE SERVE -->
+  <section id="audience" class="section-audience">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">Our Partners</span>
+        <h2 class="section-title">Who We Serve</h2>
+        <div class="title-divider center"></div>
+      </div>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <div class="audience-icon">🏥</div>
+          <h3>Hospitals & Healthcare Institutions</h3>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">🩺</div>
+          <h3>Diabetes & Chronic Disease Clinics</h3>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">💧</div>
+          <h3>Dialysis Centers</h3>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">🏪</div>
+          <h3>Pharmacies & Health Retailers</h3>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">🌍</div>
+          <h3>Public Health & Nutrition Programs</h3>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">👤</div>
+          <h3>Individuals Seeking Services</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. OUR IMPACT VISION -->
+  <section id="impact" class="section-impact">
+    <div class="container">
+      <div class="impact-box">
+        <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+        </svg>
+        <p class="impact-text">
+          Nutriomedics aims to improve healthcare outcomes across Africa by making clinically developed
+          nutraceuticals accessible, affordable, and effective.
+        </p>
+        <p class="impact-goal">
+          Our goal is to help healthcare systems integrate nutrition as a core component of
+          disease treatment and prevention.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FOUNDER MESSAGE -->
+  <section id="founder" class="section-founder">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">Founder's Note</span>
+        <h2 class="section-title">Message from Our Founder</h2>
+        <div class="title-divider center"></div>
+      </div>
+      <div class="founder-message-box">
+        <div class="quote-mark-large"></div>
+        <p class="founder-quote-text">
+          At Nutriomedics, we believe that nutrition is not only nourishment but also therapy.
+          Our mission is to translate clinical nutrition science into practical, accessible
+          solutions that improve the lives of patients facing chronic diseases.
+        </p>
+        <div class="founder-name-title">
+          <h4>Manyama Itumba John</h4>
+          <p>Founder & CEO</p>
+        </div>
+        <div class="founder-button-wrapper">
+          <button class="btn-about-founder" (click)="navigateToProducts($event)">
+            About Founder →
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. PARTNERSHIPS + ENTERAL NUTRITION -->
+  <section id="partnerships" class="section-partnerships">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">Collaborate With Us</span>
+        <h2 class="section-title">Partnerships</h2>
+        <div class="title-divider center"></div>
+      </div>
+
+      <div class="partnership-intro-box">
+        <p class="partnership-text">
+          Nutriomedics welcomes partnerships with healthcare institutions, research organizations,
+          and development partners interested in advancing therapeutic nutrition innovation.
+        </p>
+        <button class="btn-partner-main" (click)="navigateToPartnership($event)">
+          More About Partnership →
+        </button>
+      </div>
+
+      <div class="enteral-nutrition-box">
+        <h3 class="enteral-main-title">Why Hospitals Should Choose Nutriomedics Enteral Nutrition</h3>
+        <p class="enteral-description">
+          Nutriomedics enteral formulas are designed to support hospitals and healthcare providers
+          in delivering effective, safe, and affordable nutrition therapy for patients who cannot
+          meet their nutritional needs through normal oral intake.
+        </p>
+
+        <div class="enteral-grid">
+          <div class="enteral-item">
+            <h4>Clinical Advantages</h4>
+            <ul>
+              <li>✓ Balanced macronutrient composition for clinical nutrition therapy</li>
+              <li>✓ Adequate high‑quality protein to support recovery and tissue repair</li>
+              <li>✓ Optimized energy density for patients with increased metabolic needs</li>
+              <li>✓ Carefully balanced electrolytes and micronutrients</li>
+            </ul>
+          </div>
+
+          <div class="enteral-item">
+            <h4>Operational Advantages for Hospitals</h4>
+            <ul>
+              <li>✓ Designed for easy preparation and administration</li>
+              <li>✓ Suitable for tube feeding and oral nutrition support</li>
+              <li>✓ Consistent formulation for reliable clinical use</li>
+              <li>✓ Can be integrated into hospital nutrition protocols</li>
+            </ul>
+          </div>
+
+          <div class="enteral-item">
+            <h4>Economic Advantage</h4>
+            <ul>
+              <li>✓ Imported enteral formulas are often expensive and difficult to sustain</li>
+              <li>✓ Locally developed, cost‑effective clinical nutrition solutions</li>
+              <li>✓ Reduces dependence on imported products</li>
+              <li>✓ Maintains high nutritional standards</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. CONTACT SECTION -->
+  <section id="contact" class="section-contact">
+    <div class="container">
+      <div class="contact-centered">
+        <span class="contact-badge">Get in Touch</span>
+        <h2 class="contact-heading">Interested in collaboration, product information, or research partnerships?</h2>
+        <p class="contact-call-text">Contact Nutriomedics today.</p>
+
+        <div class="contact-methods">
+          <div class="contact-method">
+            <span class="contact-emoji">✉️</span>
+            <div>
+              <strong>Email: </strong>
+              <a href="mailto:info@nutriomedics.co.tz">info@nutriomedics.co.tz</a>
+            </div>
+          </div>
+          <div class="contact-method">
+            <span class="contact-emoji">📞</span>
+            <div>
+              <strong>Phone: </strong>
+              <a href="tel:+255764432040">+255 764 432 040</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-button-wrapper">
+          <button class="btn-contact-us" (click)="navigateToContact($event)">
+            Contact Us
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>

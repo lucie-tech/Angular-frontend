@@ -1,0 +1,223 @@
+#partnerships {
+  background: #ffffff;
+  padding: 5rem 4vw;
+  min-height: 100vh;
+}
+
+.partnership-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.partnership-header {
+  max-width: 600px;
+  margin: 0 auto 3.5rem;
+  text-align: center;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal-mid, #0F6E56);
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 500;
+  color: var(--ink, #1A1A18);
+  margin-bottom: 1rem;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--teal-mid, #0F6E56);
+}
+
+.section-sub {
+  color: var(--ink-muted, #444441);
+  font-size: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.partnership-image-wrap {
+  width: 60%;
+  max-width: 450px;
+  margin: 0 auto 3.5rem;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(8, 80, 65, 0.12);
+  border: 1px solid var(--border, rgba(8, 80, 65, 0.12));
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.partnership-image-wrap:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(8, 80, 65, 0.16);
+}
+
+.partnership-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.partnership-image-wrap:hover .partnership-image {
+  transform: scale(1.02);
+}
+
+.loading {
+  font-size: 1rem;
+  color: var(--teal-mid, #0F6E56);
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--teal-light, #9FE1CB);
+  border-top-color: var(--teal-mid, #0F6E56);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error {
+  font-size: 1rem;
+  color: #e53935;
+  padding: 2rem 0;
+  text-align: center;
+  background: #FEF5E8;
+  border-radius: 12px;
+  margin: 1rem 0;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--ink-muted, #444441);
+  background: #f8fafc;
+  border-radius: 20px;
+  border: 1px dashed var(--border, rgba(8, 80, 65, 0.12));
+}
+
+.partnership-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.8rem;
+  margin-top: 1rem;
+}
+
+.partnership-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid var(--border, rgba(8, 80, 65, 0.12));
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.partnership-card:hover {
+  border-color: var(--teal-bright, #1D9E75);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 28px rgba(8, 80, 65, 0.12);
+}
+
+.card-num {
+  display: block;
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--teal-bright, #1D9E75);
+  margin-bottom: 0.75rem;
+  line-height: 1;
+}
+
+.partnership-card h3 {
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--ink, #1A1A18);
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.card-divider {
+  width: 45px;
+  height: 2px;
+  background: var(--teal-light, #9FE1CB);
+  margin: 0.75rem 0 1rem;
+  transition: width 0.3s ease;
+}
+
+.partnership-card:hover .card-divider {
+  width: 60px;
+  background: var(--teal-mid, #0F6E56);
+}
+
+.partnership-card p {
+  font-size: 0.9rem;
+  color: var(--ink-muted, #444441);
+  line-height: 1.7;
+  font-weight: 300;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  #partnerships {
+    padding: 3rem 5vw;
+  }
+
+  .partnership-image-wrap {
+    width: 80%;
+    margin-bottom: 2.5rem;
+  }
+
+  .partnership-grid {
+    gap: 1.2rem;
+  }
+
+  .partnership-card {
+    padding: 1.5rem;
+  }
+
+  .card-num {
+    font-size: 1.75rem;
+  }
+
+  .partnership-card h3 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .partnership-image-wrap {
+    width: 95%;
+  }
+
+  .partnership-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+}

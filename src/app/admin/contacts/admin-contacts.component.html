@@ -1,0 +1,67 @@
+﻿<div class="table-card">
+  <table class="contacts-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>From</th>
+        <th>Subject</th>
+        <th>Status</th>
+        <th>Received</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let msg of messages">
+        <td class="col-id">{{ msg.id }}</td>
+        <td class="col-from">
+          <strong>{{ msg.fullName }}</strong>
+          <br>
+          <small>{{ msg.email }}</small>
+        </td>
+        <td class="col-subject">{{ msg.subject || '—' }}</td>
+        <td class="col-status">
+          <span class="status-badge" [ngClass]="getStatusBadgeClass(msg.status)">
+            {{ msg.status }}
+          </span>
+        </td>
+        <td class="col-date">{{ msg.createdAt | date:'medium' }}</td>
+        <td class="col-actions">
+          <button class="btn-reply" (click)="openReplyModal(msg)">✉️ Reply</button>
+          <button *ngIf="msg.status === 'UNREAD'" class="btn-read" (click)="markAsRead(msg)">Mark Read</button>
+          <button class="btn-delete" (click)="confirmDelete(msg.id)">🗑️ Delete</button>
+        </td>
+      </tr>
+      <tr *ngIf="messages.length === 0">
+        <td colspan="6" class="empty-row">No messages found.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Reply Modal -->
+<div class="modal-overlay" *ngIf="showReplyModal" (click)="closeReplyModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3>Reply to {{ selectedMessage?.fullName }}</h3>
+    <div class="original-message">
+      <strong>Original message:</strong>
+      <p>{{ selectedMessage?.message }}</p>
+    </div>
+    <textarea [(ngModel)]="replyText" placeholder="Type your reply here..." rows="5"></textarea>
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="closeReplyModal()">Cancel</button>
+      <button class="btn-send" (click)="sendReply()">Send Reply</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal-overlay" *ngIf="deleteConfirmId" (click)="cancelDelete()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3>Confirm Delete</h3>
+    <p>Are you sure you want to delete this message?</p>
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="cancelDelete()">Cancel</button>
+      <button class="btn-confirm-delete" (click)="deleteMessage()">Delete</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="login-container">
+    <div class="login-box">
+        <h2>Nutriomedics Admin</h2>
+        <p class="subtitle">Welcome back! Please login to your account</p>
+
+        <form (ngSubmit)="onLogin()">
+            <div class="input-group">
+                <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="input-group">
+                <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="error" *ngIf="errorMessage">
+                {{ errorMessage }}
+            </div>
+            <button type="submit" class="login-btn" [disabled]="loading">
+                {{ loading ? 'Logging in...' : 'Login' }}
+            </button>
+        </form>
+
+        <div class="forgot-password">
+<a routerLink="/admin/forgot-password">Forgot Password?</a>        </div>
+    </div>
+</div>

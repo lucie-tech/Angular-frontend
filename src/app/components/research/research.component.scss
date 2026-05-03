@@ -1,0 +1,117 @@
+#research {
+    background: #fff;
+}
+
+.research-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    margin-bottom: 3rem;
+
+    .section-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--teal-mid);
+            display: block;
+            margin-bottom: 0.9rem;
+        }
+    h2 {
+        font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 500;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            margin-bottom: 1rem;
+        
+            em {
+                font-style: italic;
+                color: var(--teal-mid);
+            }
+    }
+
+    p {
+        font-size: 1rem;
+        color: var(--ink-muted);
+            font-weight: 300;
+            max-width: 520px;
+            line-height: 1.75;
+    }
+}
+
+.loading {
+    font-size: 1rem;
+    color: var(--teal-mid);
+        padding: 2rem 0;
+}
+
+.error {
+    font-size: 1rem;
+    color: #e53935;
+    padding: 2rem 0;
+}
+
+.research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+}
+.research-card {
+    background: var(--off-white);
+    border-radius: 12px;
+    padding: 2rem;
+        border: 1px solid var(--border);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(8, 80, 65, 0.07);
+        }
+        
+        .card-num {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--teal-light);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+    }
+
+    .focus-tag {
+        display: inline-block;
+        background: var(--teal-pale);
+            color: var(--teal-mid);
+            font-size: 0.72rem;
+            font-weight: 500;
+            padding: 0.2rem 0.65rem;
+        border-radius: 20px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+    }
+
+    h3 {
+        font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 0.6rem;
+        line-height: 1.4;
+    }
+
+    p {
+        font-size: 0.88rem;
+            color: var(--ink-muted);
+            line-height: 1.75;
+            font-weight: 300;
+        }
+                                                                }
+                                
+                                                                .section-header h2 {
+    font-size: 1.8rem;
+}

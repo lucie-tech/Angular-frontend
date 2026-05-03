@@ -1,0 +1,35 @@
+<section id="services">
+  <!-- Services Header -->
+  <div class="services-header">
+    <span class="section-eyebrow">Clinical Services</span>
+    <h2 class="section-title">Supporting Healthcare Systems to <em>Deliver Better</em></h2>
+    <p class="section-sub">
+      We work directly with healthcare institutions, researchers, and organizations to design
+      and implement nutrition-based clinical programs.
+    </p>
+  </div>
+
+  <!-- Services Cards -->
+  <div class="services-cards">
+    <!-- Loading -->
+    <div *ngIf="isLoading" class="svc-card loading-card">
+      <p>Loading services...</p>
+    </div>
+
+    <!-- Error -->
+    <div *ngIf="!isLoading && errorMessage" class="svc-card error-card">
+      <p>{{ errorMessage }}</p>
+      <button (click)="loadServices()">Retry</button>
+    </div>
+
+    <!-- Dynamic service cards -->
+    <div *ngFor="let service of services" class="svc-card">
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="1.8">
+<path [attr.d]="getIconPath(service.iconKey)" />        </svg>
+      </div>
+      <h3>{{ service.title }}</h3>
+      <p>{{ service.description }}</p>
+    </div>
+  </div>
+</section>

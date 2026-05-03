@@ -1,0 +1,167 @@
+<!-- BLOG POSTS SECTION -->
+<section id="blog">
+  <div class="blog-header">
+    <span class="section-eyebrow">Latest Insights</span>
+    <h2 class="section-title">From Our <em>Research & Practice</em></h2>
+    <p class="section-sub">
+      Explore evidence-based articles on clinical nutrition, nutraceuticals, and healthcare innovation across Africa.
+    </p>
+  </div>
+
+  <div *ngIf="isLoading" class="blog-loading">
+    <div class="spinner"></div>
+    <p>Loading posts...</p>
+  </div>
+
+  <div *ngIf="!isLoading && errorMessage" class="blog-error">
+    <p>{{ errorMessage }}</p>
+    <button (click)="loadPosts()">Retry</button>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage">
+    <!-- Featured Posts with Images (Image on Right) -->
+    <div class="featured-posts-grid" *ngIf="postsWithImages.length > 0">
+      <article class="blog-post-featured" *ngFor="let post of postsWithImages">
+        <div class="featured-content">
+          <div class="featured-text">
+            <div class="post-meta">
+              <span class="post-date">{{ formatDate(post.createdAt) }}</span>
+            </div>
+            <h2 class="post-title">{{ post.title }}</h2>
+            <div class="post-full-content" [innerHTML]="post.content"></div>
+            <div class="featured-document" *ngIf="hasValidDocument(post)">
+              <div class="document-card">
+                <div class="document-icon">📄</div>
+                <div class="document-info">
+                  <h4>Research Paper</h4>
+                  <p>{{ post.documentName || 'Download the complete research document' }}</p>
+                </div>
+                <div class="document-actions">
+                  <button class="doc-btn-view" (click)="openDocument(post)">👁️ Read Online</button>
+                  <button class="doc-btn-download" (click)="downloadDocument(post)">⬇️ Download PDF</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="featured-image-wrapper">
+            <img [src]="post.imageUrl" [alt]="post.title" class="featured-img-large">
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Regular Posts (without images) - Full width below -->
+    <div class="regular-posts-grid" *ngIf="postsWithoutImages.length > 0">
+      <h3 class="regular-posts-title" *ngIf="postsWithImages.length > 0">More Articles</h3>
+      <div class="regular-posts-list">
+        <article class="blog-post-card" *ngFor="let post of postsWithoutImages">
+          <div class="card-content">
+            <div class="post-meta">
+              <span class="post-date">{{ formatDate(post.createdAt) }}</span>
+            </div>
+            <h2 class="card-title">{{ post.title }}</h2>
+            <div class="card-full-content" [innerHTML]="post.content"></div>
+            <div class="card-document" *ngIf="hasValidDocument(post)">
+              <div class="document-card">
+                <div class="document-icon">📄</div>
+                <div class="document-info">
+                  <h4>Research Paper</h4>
+                  <p>{{ post.documentName || 'Download the complete research document' }}</p>
+                </div>
+                <div class="document-actions">
+                  <button class="doc-btn-view" (click)="openDocument(post)">👁️ Read Online</button>
+                  <button class="doc-btn-download" (click)="downloadDocument(post)">⬇️ Download PDF</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="empty-posts" *ngIf="posts.length === 0">
+      <p>No blog posts available yet. Check back soon!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- FAQ SECTION - DYNAMIC FROM BACKEND -->
+<!-- ============================================ -->
+<section id="faq" class="faq-section">
+  <div class="faq-header">
+    <span class="faq-eyebrow">Got Questions?</span>
+    <h2 class="faq-title">Frequently Asked <em>Questions</em></h2>
+    <p class="faq-subtitle">
+      Find answers to common questions about Nutriomedics products, partnerships, and clinical nutrition solutions.
+    </p>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoadingFaqs" class="faq-loading">
+    <div class="spinner"></div>
+    <p>Loading FAQs...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="!isLoadingFaqs && faqErrorMessage" class="faq-error">
+    <p>{{ faqErrorMessage }}</p>
+    <button (click)="loadFAQs()">Retry</button>
+  </div>
+
+  <!-- FAQ List - Dynamic from Backend -->
+  <div class="faq-grid" *ngIf="!isLoadingFaqs && !faqErrorMessage && faqs.length > 0">
+    <div class="faq-item" *ngFor="let faq of faqs; let i = index" [class.active]="faq.active">
+      <div class="faq-question" (click)="toggleFaq(i)">
+        <div class="faq-question-content">
+          <span class="faq-number">{{ (i + 1).toString().padStart(2, '0') }}</span>
+          <h3>{{ faq.question }}</h3>
+        </div>
+        <div class="faq-icon">
+          <svg [class.rotated]="faq.active" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+      <div class="faq-answer" [class.open]="faq.active">
+        <div class="faq-answer-content">
+          <p>{{ faq.answer }}</p>
+          <div *ngIf="faq.additionalInfo" class="faq-additional">
+            <p>{{ faq.additionalInfo }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-faqs" *ngIf="!isLoadingFaqs && !faqErrorMessage && faqs.length === 0">
+    <p>No FAQs available yet. Check back soon!</p>
+  </div>
+</section>
+
+<!-- DOCUMENT VIEWER MODAL -->
+<div class="document-modal" *ngIf="showDocumentModal" (click)="closeDocumentModal()">
+  <div class="document-modal-content" (click)="$event.stopPropagation()">
+    <div class="document-modal-header">
+      <h3>{{ selectedPost?.title }} - Research Paper</h3>
+      <button class="modal-close" (click)="closeDocumentModal()">✕</button>
+    </div>
+    <div class="document-modal-body">
+      <div class="pdf-toolbar">
+        <button class="pdf-tool" (click)="downloadDocument(selectedPost!)">
+          ⬇️ Download PDF
+        </button>
+        <button class="pdf-tool" (click)="closeDocumentModal()">
+          ✕ Close
+        </button>
+      </div>
+      <iframe *ngIf="pdfUrl" [src]="pdfUrl | safeUrl" class="pdf-viewer" frameborder="0">
+      </iframe>
+      <div *ngIf="!pdfUrl" class="pdf-error">
+        <p>Unable to load document. <a [href]="getDocumentUrl(selectedPost)" target="_blank">Click here to open
+            directly</a></p>
+      </div>
+    </div>
+  </div>
+</div>

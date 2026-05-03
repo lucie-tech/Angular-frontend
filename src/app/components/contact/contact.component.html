@@ -1,0 +1,197 @@
+﻿<section id="contact">
+  <div class="contact-inner">
+
+    <!-- â”€â”€ TOP GRID: CTA + Contacts | Form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <div class="top-grid">
+
+      <!-- Left: CTA + Contact Details -->
+      <div class="left-col">
+
+        <div class="cta-side">
+          <h2 class="cta-title">Ready to <em>Transform</em> Patient Nutrition?</h2>
+          <p class="cta-sub">
+            Whether you're a hospital, researcher, government agency, or industry partner â€”
+            or any other individual or organization interested in learning more about our work let's build something
+            that improves
+            lives together.
+            We look forward to connect with you!
+          </p>
+        </div>
+
+        <div class="contact-details">
+          <h2 class="contacts-title">CONTACTS</h2>
+
+          <!-- Dynamic contact rows (phone, email, address, etc.) -->
+          <div class="contact-row" *ngFor="let row of contactRows">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+                <path [attr.d]="row.iconPath" />
+                <ng-container *ngIf="row.extraPath">
+                  <path [attr.d]="row.extraPath" />
+                </ng-container>
+                <ng-container *ngIf="row.polyline">
+                  <polyline [attr.points]="row.polyline" />
+                </ng-container>
+              </svg>
+            </div>
+            <div>
+              <span class="contact-label">{{ row.label }}</span>
+              <ng-container *ngIf="row.label === 'Email'; else plainVal">
+                <a class="contact-val contact-link" [href]="'mailto:' + row.value">{{ row.value }}</a>
+              </ng-container>
+              <ng-template #plainVal>
+                <span class="contact-val">{{ row.value }}</span>
+              </ng-template>
+            </div>
+          </div>
+<!-- Instagram contact row -->
+<div class="contact-row">
+  <div class="contact-icon">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
+      <path
+        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+    </svg>
+  </div>
+  <div>
+    <span class="contact-label">Instagram</span>
+    <a class="contact-val contact-link" href="https://www.instagram.com/nutriomedics_tz?igsh=YTJmaGVwank1dm4="
+      target="_blank" rel="noopener noreferrer">Nutriomedics_tz</a>
+  </div>
+</div>
+
+        </div>
+      </div>
+      
+      <!-- Right: Feedback Form -->
+      <div class="right-col">
+        <div class="form-card">
+      
+          <!-- Success state -->
+          <div class="form-success" *ngIf="submitSuccess">
+            <div class="success-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+            </div>
+            <h3>Message Received!</h3>
+            <p>Thank you for reaching out. We'll get back to you within 24â€“48 hours.</p>
+            <button class="btn-outline" (click)="submitSuccess = false">Send Another</button>
+          </div>
+      
+          <!-- Form -->
+          <form *ngIf="!submitSuccess" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="form-header">
+              <span class="form-eyebrow">Share Your Thoughts</span>
+              <h3 class="form-title">We'd Love to Hear From You</h3>
+            </div>
+      
+            <!-- Star Rating -->
+            <div class="rating-group">
+              <span class="field-label">RATE US</span>
+              <div class="stars" (mouseleave)="clearHover()">
+                <button *ngFor="let s of [1,2,3,4,5]" type="button" class="star" [class.active]="s <= displayRating"
+                  (mouseenter)="setHover(s)" (click)="setRating(s)" [attr.aria-label]="'Rate ' + s + ' out of 5'">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </button>
+              </div>
+              <span class="rating-hint" *ngIf="rating > 0">
+                {{ ['', 'Poor', 'Fair', 'Good', 'Very Good', 'Excellent'][rating] }}
+              </span>
+            </div>
+      
+            <!-- Row: Name + Email -->
+            <div class="form-row">
+              <div class="field-group" [class.has-error]="isInvalid('fullName')">
+                <label class="field-label" for="full_name">Full Name <span class="req">*</span></label>
+                <input id="full_name" type="text" formControlName="fullName" placeholder="Enter your name" />
+                <span class="error-msg" *ngIf="isInvalid('fullName')">Please enter your full name</span>
+              </div>
+              <div class="field-group" [class.has-error]="isInvalid('email')">
+                <label class="field-label" for="email">Email <span class="req">*</span></label>
+                <input id="email" type="email" formControlName="email" placeholder="Enter your email" />
+                <span class="error-msg" *ngIf="isInvalid('email')">Enter a valid email address</span>
+              </div>
+            </div>
+      
+            <!-- Row: Phone + Subject -->
+            <div class="form-row">
+              <div class="field-group">
+                <label class="field-label" for="phone">Phone <span class="optional">(optional)</span></label>
+                <input id="phone" type="tel" formControlName="phone" placeholder="+255 7XX XXX XXX" />
+              </div>
+              <div class="field-group" [class.has-error]="isInvalid('subject')">
+                <label class="field-label" for="subject">Subject <span class="req">*</span></label>
+                <div class="select-wrap">
+                  <select id="subject" formControlName="subject">
+                    <option value="" disabled>Select a topicâ€¦</option>
+                    <option *ngFor="let s of subjects" [value]="s">{{ s }}</option>
+                  </select>
+                  <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </div>
+                <span class="error-msg" *ngIf="isInvalid('subject')">Please select a subject</span>
+              </div>
+            </div>
+      
+            <!-- Message -->
+            <div class="field-group" [class.has-error]="isInvalid('message')">
+              <label class="field-label" for="message">Message <span class="req">*</span></label>
+              <textarea id="message" formControlName="message" rows="4" placeholder="Tell us what's on your mindâ€¦"></textarea>
+              <span class="error-msg" *ngIf="isInvalid('message')">Message must be at least 10 characters</span>
+              </div>
+              
+              <!-- Error banner -->
+              <div class="alert-error" *ngIf="submitError">
+                Something went wrong. Please try again or email us directly.
+              </div>
+              
+              <button type="submit" class="btn-submit" [disabled]="submitting">
+                <span *ngIf="!submitting">Send Message</span>
+                <span *ngIf="submitting" class="spinner-wrap">
+                  <svg class="spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path
+                      d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                  </svg>
+                  Sendingâ€¦
+                </span>
+              </button>
+              </form>
+              
+              </div>
+              </div>
+              </div>
+              
+              <!-- â”€â”€ FULL-WIDTH MAP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+              <div class="map-section">
+                <div class="map-header">
+                  <div class="map-header-left">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+          </svg>
+          <span class="map-header-title">Our Location</span>
+          <span class="map-header-sub">Dodoma, Tanzania</span>
+        </div>
+        <a class="map-open-btn" href="https://maps.google.com/?q=Dodoma,Tanzania" target="_blank"
+          rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15 3 21 3 21 9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+          </svg>
+          Open in Google Maps
+        </a>
+      </div>
+
+      <iframe class="map-frame" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126743.66681254937!2d35.63929!3d-6.17221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18373005d7de7fab%3A0xf2f4e43a438b9c12!2sDodoma%2C%20Tanzania!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s">
+      </iframe>
+    </div>
+
+  </div>
+</section>

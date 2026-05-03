@@ -1,0 +1,470 @@
+// src/app/components/admin/faq/faq.component.scss
+
+.faq-admin {
+    padding: 28px 32px;
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    h1 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #1a2535;
+        margin-bottom: 4px;
+    }
+
+    p {
+        color: #6b7a8d;
+        font-size: 14px;
+        margin-top: 4px;
+    }
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #00b894 0%, #00a381 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 184, 148, 0.3);
+    }
+
+    span {
+        font-size: 16px;
+    }
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.loading-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    .spinner {
+        width: 48px;
+        height: 48px;
+        border: 3px solid rgba(0, 184, 148, 0.1);
+        border-top-color: #00b894;
+        border-right-color: #e8953e;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin: 0 auto 16px;
+    }
+
+    p {
+        color: #6b7a8d;
+        font-size: 14px;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.table-container {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    overflow-x: auto;
+}
+
+.faq-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+
+    thead {
+        tr {
+            background: #fafbfc;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        th {
+            padding: 14px 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #6b7a8d;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            text-align: left;
+        }
+    }
+
+    tbody {
+        tr {
+            border-bottom: 1px solid #f5f5f5;
+            transition: background 0.2s;
+
+            &:hover {
+                background: #fafcf8;
+            }
+        }
+
+        td {
+            padding: 14px 20px;
+            font-size: 13px;
+            color: #1a2535;
+            vertical-align: middle;
+        }
+    }
+}
+
+.col-order {
+    width: 100px;
+}
+
+.col-question {
+    width: 30%;
+}
+
+.col-answer {
+    width: 40%;
+}
+
+.col-status {
+    width: 100px;
+}
+
+.col-actions {
+    width: 80px;
+}
+
+.order-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    .move-btn {
+        background: #f0f4f8;
+        border: none;
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 10px;
+        color: #6b7a8d;
+        transition: all 0.2s;
+
+        &:hover:not(:disabled) {
+            background: #00b894;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        &:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+    }
+
+    .order-number {
+        font-weight: 600;
+        color: #4a9f6e;
+        min-width: 30px;
+        text-align: center;
+        font-size: 13px;
+    }
+}
+
+.question-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-weight: 500;
+
+    .info-badge {
+        font-size: 10px;
+        background: #fff3e0;
+        color: #e8953e;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-weight: normal;
+    }
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #fdecea;
+    color: #e74c3c;
+    transition: all 0.2s;
+
+    &.active {
+        background: #e8faf6;
+        color: #00b894;
+    }
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.btn-edit,
+.btn-delete {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    margin: 0 2px;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.btn-edit {
+    color: #0984e3;
+
+    &:hover {
+        background: #e8f4fd;
+    }
+}
+
+.btn-delete {
+    color: #e74c3c;
+
+    &:hover {
+        background: #fdecea;
+    }
+}
+
+.empty-row {
+    td {
+        padding: 60px 20px;
+    }
+}
+
+.empty-state {
+    text-align: center;
+
+    p {
+        color: #8aa0a5;
+        margin-bottom: 16px;
+        font-size: 14px;
+    }
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal {
+    background: white;
+    border-radius: 20px;
+    width: 600px;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease;
+
+    &.modal-sm {
+        width: 400px;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #f0f0f0;
+
+    h2 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1a2535;
+        margin: 0;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        color: #6b7a8d;
+        transition: all 0.2s;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+
+        &:hover {
+            background: #f0f4f8;
+            color: #1a2535;
+        }
+    }
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px 24px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+
+    label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #1a2535;
+        margin-bottom: 6px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1.5px solid #e0e7ef;
+        border-radius: 10px;
+        font-size: 14px;
+        color: #1a2535;
+        outline: none;
+        transition: all 0.2s;
+        font-family: inherit;
+
+        &:focus {
+            border-color: #00b894;
+            box-shadow: 0 0 0 3px rgba(0, 184, 148, 0.1);
+        }
+    }
+
+    textarea.form-control {
+        resize: vertical;
+    }
+
+    .help-text {
+        font-size: 11px;
+        color: #8aa0a5;
+        margin-top: 6px;
+    }
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+
+    .form-group {
+        flex: 1;
+    }
+}
+
+.half {
+    flex: 1;
+}
+
+.btn-cancel {
+    background: #f0f4f8;
+    color: #6b7a8d;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        background: #e0e7ef;
+    }
+}
+
+.warning {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .faq-admin {
+        padding: 16px;
+    }
+
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .modal {
+        width: 95vw;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}

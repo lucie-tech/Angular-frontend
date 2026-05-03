@@ -1,0 +1,115 @@
+<div class="services-page">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div>
+            <h1>Services</h1>
+            <p>Manage all services offered by Nutriomedics</p>
+        </div>
+        <button class="btn-primary" (click)="openAddForm()">➕ Add Service</button>
+    </div>
+
+    <!-- LOADING -->
+    <div class="loading" *ngIf="loading">Loading services...</div>
+
+    <!-- SERVICES TABLE -->
+    <div class="table-card" *ngIf="!loading">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Icon</th>
+                    <th>Order</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let service of services">
+                    <td>{{ service.id }}</td>
+                    <td>
+                        <strong>{{ service.title }}</strong>
+                        <p class="desc-preview">{{ service.description | slice:0:60 }}...</p>
+                    </td>
+                    <td><span class="icon-badge">{{ service.iconKey }}</span></td>
+                    <td>{{ service.displayOrder }}</td>
+                    <td>
+                        <span class="toggle" [class.active]="service.isActive" (click)="toggleActive(service)">
+                            {{ service.isActive ? 'Active' : 'Inactive' }}
+                        </span>
+                    </td>
+                    <td class="actions">
+                        <button class="btn-edit" (click)="openEditForm(service)">✏️ Edit</button>
+                        <button class="btn-delete" (click)="confirmDelete(service.id!)">🗑️ Delete</button>
+                    </td>
+                </tr>
+                <tr *ngIf="services.length === 0">
+                    <td colspan="6" class="empty">No services found. Add your first one!</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ADD/EDIT FORM MODAL -->
+    <div class="modal-overlay" *ngIf="showForm" (click)="closeForm()">
+        <div class="modal" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h2>{{ isEditing ? 'Edit Service' : 'Add New Service' }}</h2>
+                <button class="close-btn" (click)="closeForm()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Title *</label>
+                    <input type="text" [(ngModel)]="form.title" placeholder="e.g. Clinical Nutrition Consulting" />
+                </div>
+                <div class="form-group">
+                    <label>Description *</label>
+                    <textarea [(ngModel)]="form.description" rows="4" placeholder="Describe this service..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Icon Key</label>
+                        <select [(ngModel)]="form.iconKey">
+                            <option value="">Select icon</option>
+                            <option *ngFor="let icon of iconOptions" [value]="icon.key">{{ icon.label }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Display Order</label>
+                        <input type="number" [(ngModel)]="form.displayOrder" min="1" />
+                    </div>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" [(ngModel)]="form.isActive" />
+                        Active (visible on website)
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" (click)="closeForm()">Cancel</button>
+                <button class="btn-primary" (click)="saveService()">
+                    {{ isEditing ? '💾 Update Service' : '➕ Create Service' }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DELETE CONFIRM MODAL -->
+    <div class="modal-overlay" *ngIf="deleteConfirmId">
+        <div class="modal modal-sm">
+            <div class="modal-header">
+                <h2>⚠️ Confirm Delete</h2>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this service? This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" (click)="deleteConfirmId = null">Cancel</button>
+                <button class="btn-delete" (click)="deleteService()">🗑️ Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+
+</div>

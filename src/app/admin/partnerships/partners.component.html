@@ -1,0 +1,136 @@
+<div class="partners-page">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div>
+            <h1>🤝 Partnerships</h1>
+            <p>Manage all partnerships and collaborations</p>
+        </div>
+        <button class="btn-primary" (click)="openAddForm()">➕ Add Partner</button>
+    </div>
+
+    <!-- LOADING -->
+    <div class="loading" *ngIf="loading">Loading partners...</div>
+
+    <!-- PARTNERS TABLE -->
+    <div class="table-card" *ngIf="!loading">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Organization</th>
+                    <th>Type</th>
+                    <th>Website</th>
+                    <th>Order</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let partner of partners">
+                    <td>{{ partner.id }}</td>
+                    <td>
+                        <strong>{{ partner.organizationName }}</strong>
+                        <p class="desc-preview">{{ partner.description | slice:0:60 }}...</p>
+                    </td>
+                    <td><span class="type-badge">{{ partner.partnerType }}</span></td>
+                    <td>
+                        <a *ngIf="partner.websiteUrl" [href]="partner.websiteUrl" target="_blank" class="website-link">
+                            🔗 Visit
+                        </a>
+                        <span *ngIf="!partner.websiteUrl" class="no-url">—</span>
+                    </td>
+                    <td>{{ partner.displayOrder }}</td>
+                    <td>
+                        <span class="toggle" [class.active]="partner.isActive" (click)="toggleActive(partner)">
+                            {{ partner.isActive ? 'Active' : 'Inactive' }}
+                        </span>
+                    </td>
+                    <td class="actions">
+                        <button class="btn-edit" (click)="openEditForm(partner)">✏️ Edit</button>
+                        <button class="btn-delete" (click)="confirmDelete(partner.id!)">🗑️ Delete</button>
+                    </td>
+                </tr>
+                <tr *ngIf="partners.length === 0">
+                    <td colspan="7" class="empty">No partners found. Add your first one!</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ADD/EDIT FORM MODAL -->
+    <div class="modal-overlay" *ngIf="showForm" (click)="closeForm()">
+        <div class="modal" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h2>{{ isEditing ? '✏️ Edit Partner' : '➕ Add New Partner' }}</h2>
+                <button class="close-btn" (click)="closeForm()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Organization Name *</label>
+                        <input type="text" [(ngModel)]="form.organizationName"
+                            placeholder="e.g. University of Dar es Salaam" />
+                    </div>
+                    <div class="form-group">
+                        <label>Partner Type *</label>
+                        <select [(ngModel)]="form.partnerType">
+                            <option value="">Select type</option>
+                            <option *ngFor="let type of partnerTypes" [value]="type">{{ type }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea [(ngModel)]="form.description" rows="3"
+                        placeholder="Describe this partnership..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Logo URL</label>
+                        <input type="text" [(ngModel)]="form.logoUrl" placeholder="https://example.com/logo.png" />
+                    </div>
+                    <div class="form-group">
+                        <label>Website URL</label>
+                        <input type="text" [(ngModel)]="form.websiteUrl" placeholder="https://example.com" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Display Order</label>
+                        <input type="number" [(ngModel)]="form.displayOrder" min="1" />
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" [(ngModel)]="form.isActive" />
+                            Active (visible on website)
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" (click)="closeForm()">Cancel</button>
+                <button class="btn-primary" (click)="savePartner()">
+                    {{ isEditing ? '💾 Update Partner' : '➕ Add Partner' }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DELETE CONFIRM MODAL -->
+    <div class="modal-overlay" *ngIf="deleteConfirmId">
+        <div class="modal modal-sm">
+            <div class="modal-header">
+                <h2>⚠️ Confirm Delete</h2>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this partner? This cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" (click)="deleteConfirmId = null">Cancel</button>
+                <button class="btn-delete" (click)="deletePartner()">🗑️ Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+
+</div>

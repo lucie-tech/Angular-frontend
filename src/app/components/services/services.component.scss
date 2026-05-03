@@ -1,0 +1,247 @@
+:host {
+  display: block;
+}
+
+section {
+  /* ✅ REMOVED: border-top, background: var(--off-white) */
+  background: linear-gradient(160deg, #f0faf6 0%, #ffffff 50%, #fdf6ee 100%);
+  padding: 3.5rem 6vw 5rem;
+  /* ✅ reduced from 6rem 8vw */
+  font-family: var(--font-body);
+  position: relative;
+}
+
+/* ============================================
+   SERVICES HEADER
+   ============================================ */
+.services-header {
+  max-width: 600px;
+  margin: 0 auto 2.8rem;
+  text-align: center;
+}
+
+/* ============================================
+   SERVICES CARDS GRID
+   ============================================ */
+.services-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.1rem;
+}
+
+.svc-card {
+  background: #ffffff;
+  /* ✅ was var(--warm-white) = grey */
+  border: 1px solid rgba(29, 158, 117, 0.10);
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(8, 80, 65, 0.06);
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.svc-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal-bright), var(--amber-mid));
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.svc-card:hover {
+  border-color: rgba(29, 158, 117, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(8, 80, 65, 0.11);
+}
+
+.svc-card:hover::after {
+  opacity: 1;
+}
+
+.svc-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+
+.svc-card p {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+/* ============================================
+   ICON BADGE
+   ============================================ */
+.svc-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, var(--teal-pale), rgba(29, 158, 117, 0.08));
+  border: 1px solid rgba(29, 158, 117, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.svc-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ============================================
+   DIVIDER
+   ============================================ */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--teal-light), transparent);
+  margin: 4rem 0;
+  opacity: 0.6;
+}
+
+/* ============================================
+   ENTERAL SECTION
+   ============================================ */
+.enteral-section {
+  margin-top: 0;
+}
+
+.enteral-header {
+  max-width: 600px;
+  margin: 0 auto 2.8rem;
+  text-align: center;
+}
+
+.enteral-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+/* ============================================
+   ENTERAL CARDS
+   ============================================ */
+.en-card {
+  background: #ffffff;
+  /* ✅ was var(--warm-white) = grey */
+  border: 1px solid rgba(29, 158, 117, 0.10);
+  border-radius: 18px;
+  padding: 1.75rem;
+  box-shadow: 0 2px 10px rgba(8, 80, 65, 0.06);
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+
+.en-card:hover {
+  border-color: rgba(29, 158, 117, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(8, 80, 65, 0.11);
+}
+
+.en-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.85rem;
+  line-height: 1.3;
+}
+
+/* ============================================
+   PILL TAG
+   ============================================ */
+.pill {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(29, 158, 117, 0.10), rgba(29, 158, 117, 0.04));
+  color: var(--teal-mid);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(29, 158, 117, 0.14);
+}
+
+/* ============================================
+   ENTERAL LIST
+   ============================================ */
+.en-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.en-list li {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  font-weight: 300;
+  line-height: 1.6;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.en-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--teal-bright);
+}
+
+.en-para {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  font-weight: 300;
+  line-height: 1.72;
+  margin: 0;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1100px) {
+  .services-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .services-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .enteral-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  section {
+    padding: 2.5rem 5vw 4rem;
+  }
+
+  .services-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .enteral-grid {
+    grid-template-columns: 1fr;
+  }
+}

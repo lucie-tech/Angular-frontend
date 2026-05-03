@@ -1,0 +1,102 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-box {
+    background: #f5f5f5; // Light grey background
+    padding: 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+    h2 {
+        text-align: center;
+        margin-bottom: 10px;
+        color: #333;
+        font-size: 28px;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 14px;
+    }
+
+    .input-group {
+        margin-bottom: 20px;
+
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+
+            &:focus {
+                outline: none;
+                border-color: #ff6b35;
+                box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+            }
+        }
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 12px;
+        background: #4caf50 100%;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+        &:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        &:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+    }
+
+    .error {
+        color: #e74c3c;
+        margin-bottom: 15px;
+        text-align: center;
+        padding: 8px;
+        background: rgba(231, 76, 60, 0.1);
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    .forgot-password {
+        text-align: center;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #e0e0e0;
+
+        a {
+            color: #024983e4;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: #4caf50;
+                text-decoration: underline;
+            }
+        }
+    }
+}

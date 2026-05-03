@@ -1,0 +1,61 @@
+<section id="products">
+  <div class="section-header">
+    <span class="section-eyebrow">Our Innovations</span>
+    <h2 class="section-title">Products Built for <em>Real Clinical Gaps</em></h2>
+    <p class="section-sub">
+      Each product is designed around an identified clinical need, formulated with evidence,
+      and adapted for African healthcare realities.
+    </p>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading products...</p>
+  </div>
+  
+  <!-- Error State -->
+  <div *ngIf="error" class="error-state">
+    <p>{{ error }}</p>
+    <button (click)="loadProducts()" class="retry-btn">Retry</button>
+  </div>
+  
+  <!-- ALL PRODUCTS GRID - Same style for every product -->
+  <div class="products-grid" *ngIf="!loading && !error">
+    <div class="product-card" *ngFor="let product of allProducts">
+  
+      <!-- Product Image -->
+      <div class="product-image-container">
+        <img *ngIf="product.imageUrl" [src]="getImageUrl(product.imageUrl)" [alt]="product.name" class="product-image">
+        <div *ngIf="!product.imageUrl" class="no-image-placeholder">
+          <span>📷</span>
+          <p>No Image</p>
+        </div>
+      </div>
+  
+      <!-- Product Badge (Featured or Category) -->
+      <div class="product-badge" [class.featured]="product.featured">
+        {{ product.featured ? '⭐ FLAGSHIP · ' + product.category : product.category }}
+      </div>
+  
+      <!-- Product Name -->
+      <h3 class="product-name">{{ product.name }}</h3>
+
+      <!-- Product Tagline -->
+      <p class="product-tagline">{{ product.tagline }}</p>
+
+      <!-- Clinical Benefits -->
+      <ul class="product-features">
+        <li *ngFor="let benefit of getClinicalBenefits(product.clinicalBenefits)">
+          <div class="feat-check">
+            <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="1.5,5 4,7.5 8.5,2.5" />
+            </svg>
+            </div>
+          {{ benefit }}
+          </li>
+      </ul>
+    </div>
+  </div>
+  </section>
+

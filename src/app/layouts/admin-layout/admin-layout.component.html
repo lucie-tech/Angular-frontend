@@ -1,0 +1,52 @@
+<div class="admin-layout">
+    <!-- Mobile Menu Toggle Button -->
+    <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+        <span class="menu-icon">☰</span>
+    </button>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" [class.active]="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" [class.mobile-open]="isMobileMenuOpen">
+        <div class="sidebar-logo">
+            <h2>NutrioMedics</h2>
+            <span>Admin Portal</span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-label">Main Menu</div>
+            <a *ngFor="let item of navItems" [routerLink]="item.path" routerLinkActive="active" class="nav-item"
+                (click)="closeMobileMenu()">
+                <span class="nav-icon">{{ item.icon }}</span>
+                <span class="nav-label-text">{{ item.label }}</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Top Bar with Profile and Logout -->
+        <div class="top-bar">
+            <div class="page-title">
+                <h1>Welcome back!</h1>
+                <p>Manage your NutrioMedics admin panel</p>
+            </div>
+            <div class="user-actions">
+                <button class="profile-btn" (click)="goToProfile()">
+                    <span class="btn-icon">👤</span>
+                    <span>My Profile</span>
+                </button>
+                <button class="logout-btn" (click)="logout()">
+                    <span class="btn-icon">🚪</span>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Router Outlet for page content -->
+        <div class="content-area">
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+</div>

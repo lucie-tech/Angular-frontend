@@ -1,0 +1,63 @@
+<div class="dashboard-page">
+    <div class="top-bar">
+        <div>
+            <h1>Dashboard</h1>
+            <p>Welcome back, {{ user?.name || user?.email }}!</p>
+        </div>
+    </div>
+
+    <div *ngIf="loading" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Loading dashboard data...</p>
+    </div>
+
+    <!-- ✅ Show error if any request failed -->
+    <div *ngIf="error && !loading" class="error-banner">
+        ⚠️ {{ error }}
+    </div>
+
+    <div class="stats-grid" *ngIf="!loading">
+        <div class="stat-card c1">
+            <div class="stat-icon">💊</div>
+            <div class="stat-info">
+                <h3>{{ stats.products }}</h3>
+                <p>Products</p>
+            </div>
+        </div>
+        <div class="stat-card c2">
+            <div class="stat-icon">⚙️</div>
+            <div class="stat-info">
+                <h3>{{ stats.services }}</h3>
+                <p>Services</p>
+            </div>
+        </div>
+        <div class="stat-card c3">
+            <div class="stat-icon">🔬</div>
+            <div class="stat-info">
+                <h3>{{ stats.research }}</h3>
+                <p>Research Areas</p>
+            </div>
+        </div>
+        <div class="stat-card c4">
+            <div class="stat-icon">🤝</div>
+            <div class="stat-info">
+                <h3>{{ stats.partners }}</h3>
+                <p>Partners</p>
+            </div>
+        </div>
+        <div class="stat-card c5">
+            <div class="stat-icon">📝</div>
+            <div class="stat-info">
+                <h3>{{ stats.blogs }}</h3>
+                <p>Blog Posts</p>
+            </div>
+        </div>
+        <div class="stat-card c6">
+            <div class="stat-icon">📞</div>
+            <div class="stat-info">
+                <h3>{{ stats.contacts }}</h3>
+                <p>Messages</p>
+            </div>
+        </div>
+    </div>
+</div>

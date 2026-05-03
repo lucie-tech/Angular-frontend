@@ -1,0 +1,21 @@
+<div class="sidebar-overlay" [class.active]="isOpen" (click)="close()"></div>
+
+<div class="sidebar" [class.active]="isOpen">
+  <div class="sidebar-header">
+    <h2>Menu</h2>
+    <button class="sidebar-close" (click)="close()">&times;</button>
+  </div>
+  <nav class="sidebar-nav">
+    <ul>
+      <li *ngFor="let link of links">
+
+        [routerLink]="link.route"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: link.route === '/' }"
+        (click)="close()">
+        {{ link.label }}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

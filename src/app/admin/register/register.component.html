@@ -1,0 +1,25 @@
+<div class="register-container">
+
+    <h2>Admin Registration</h2>
+
+    <input type="text" placeholder="Full Name" [(ngModel)]="name" />
+
+    <input type="email" placeholder="Email" [(ngModel)]="email" />
+
+    <input type="password" placeholder="Password" [(ngModel)]="password" />
+
+    <button (click)="onRegister()" [disabled]="loading">
+
+        {{ loading ? 'Creating account...' : 'Register' }}
+
+    </button>
+
+    <p class="success" *ngIf="successMessage">
+        {{ successMessage }}
+    </p>
+
+    <p class="error" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </p>
+
+</div>

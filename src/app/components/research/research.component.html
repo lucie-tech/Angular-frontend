@@ -1,0 +1,21 @@
+<section id="research">
+  <div class="research-container">
+    <div class="section-header">
+      <span class="section-label">RESEARCH & DEVELOPMENT</span>
+      <h2>What We <em>Investigate</em></h2>
+      <p>Our research focuses on bridging clinical gaps through evidence-based nutritional science.</p>
+    </div>
+
+    <div *ngIf="isLoading" class="loading">Loading research areas...</div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+
+    <div *ngIf="!isLoading && !error" class="research-grid">
+      <div class="research-card" *ngFor="let area of researchAreas; let i = index">
+        <span class="card-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+        <span class="focus-tag">{{ area.focusTag }}</span>
+        <h3>{{ area.title }}</h3>
+        <p>{{ area.description }}</p>
+      </div>
+    </div>
+  </div>
+  </section>

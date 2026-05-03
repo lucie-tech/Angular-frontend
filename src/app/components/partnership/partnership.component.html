@@ -1,0 +1,36 @@
+<section id="partnerships">
+  <div class="partnership-container">
+    <div class="partnership-header">
+      <span class="section-eyebrow">Partnerships</span>
+      <h2 class="section-title">Who We <em>Work With</em></h2>
+      <p class="section-sub">
+        Nutriomedics welcomes collaboration with organizations committed to
+        improving health outcomes across Africa.
+      </p>
+    </div>
+
+    <div class="partnership-image-wrap">
+      <img src="assets/images/partner.jpeg" alt="Healthcare professionals collaborating" class="partnership-image"
+        loading="lazy" />
+    </div>
+
+    <div *ngIf="isLoading" class="loading">
+      <span class="loading-spinner"></span>
+      Loading partnerships...
+    </div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+
+    <div *ngIf="!isLoading && !error && partnerships.length > 0" class="partnership-grid">
+      <div class="partnership-card" *ngFor="let partner of partnerships; let i = index">
+        <span class="card-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+        <h3>{{ partner.organizationName }}</h3>
+        <div class="card-divider"></div>
+        <p>{{ partner.description }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="!isLoading && !error && partnerships.length === 0" class="empty-state">
+      <p>No partnerships available at the moment.</p>
+    </div>
+  </div>
+</section>
