@@ -1,12 +1,15 @@
 #partnerships {
   background: #ffffff;
-  padding: 5rem 4vw;
+  padding: 5rem 1.5rem;
+  /* reduced horizontal padding – near full width */
   min-height: 100vh;
 }
 
 .partnership-container {
-  max-width: 1200px;
+  max-width: 1400px;
+  /* wider, but still comfortable on large screens */
   margin: 0 auto;
+  width: 100%;
 }
 
 .partnership-header {
@@ -181,9 +184,49 @@
   margin: 0;
 }
 
+/* ----- NEW: Partner Callout Section ----- */
+.partner-cta {
+  margin-top: 4rem;
+  text-align: center;
+  background: #f8fafc;
+  border-radius: 32px;
+  padding: 2rem 2rem;
+  border: 1px solid rgba(8, 80, 65, 0.12);
+}
+
+.partner-cta-content h3 {
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: 1.6rem;
+  color: var(--ink, #1A1A18);
+  margin-bottom: 0.75rem;
+}
+
+.partner-cta-content p {
+  max-width: 600px;
+  margin: 0 auto 1rem;
+  color: var(--ink-muted, #444441);
+  line-height: 1.6;
+}
+
+.partner-cta-small {
+  font-size: 0.9rem;
+}
+
+.partner-link {
+  color: var(--teal-mid, #0F6E56);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.partner-link:hover {
+  color: var(--teal-bright, #1D9E75);
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
   #partnerships {
-    padding: 3rem 5vw;
+    padding: 3rem 1rem;
+    /* even smaller padding on tablets */
   }
 
   .partnership-image-wrap {
@@ -205,6 +248,15 @@
 
   .partnership-card h3 {
     font-size: 1.2rem;
+  }
+
+  .partner-cta {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+  }
+
+  .partner-cta-content h3 {
+    font-size: 1.3rem;
   }
 }
 
