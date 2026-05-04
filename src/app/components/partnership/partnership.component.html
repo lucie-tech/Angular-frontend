@@ -1,5 +1,6 @@
 <section id="partnerships">
   <div class="partnership-container">
+    <!-- Header -->
     <div class="partnership-header">
       <span class="section-eyebrow">Partnerships</span>
       <h2 class="section-title">Who We <em>Work With</em></h2>
@@ -9,16 +10,34 @@
       </p>
     </div>
 
-    <div class="partnership-image-wrap">
-      <img src="assets/images/partner.jpeg" alt="Healthcare professionals collaborating" class="partnership-image"
-        loading="lazy" />
+    <div class="partnership-row">
+      <div class="partnership-image-wrap">
+        <img src="assets/images/partner.jpeg" alt="Healthcare professionals collaborating" class="partnership-image"
+          loading="lazy" />
+      </div>
+      <div class="partnership-intro-text">
+        <h3>Collaborating for better clinical nutrition</h3>
+        <p>
+          We partner with academic institutions, healthcare facilities, government health agencies, NGOs, and industry
+          leaders to advance therapeutic nutrition across Africa. Our collaborations focus on research, product
+          validation, clinical integration, and scaling locally made nutraceutical solutions.
+        </p>
+        <p>
+          From the University of Dodoma to EGPAF, ICAP, USAID, and COSTECH – every partnership helps us deliver safe,
+          affordable, and evidence‑based nutrition therapies to those who need them most.
+        </p>
+      </div>
     </div>
 
     <div *ngIf="isLoading" class="loading">
       <span class="loading-spinner"></span>
       Loading partnerships...
     </div>
-    <div *ngIf="error" class="error">{{ error }}</div>
+
+    <div *ngIf="error" class="error">
+      <p>{{ error }}</p>
+      <button class="retry-btn" (click)="retry()">↻ Retry</button>
+    </div>
 
     <div *ngIf="!isLoading && !error && partnerships.length > 0" class="partnership-grid">
       <div class="partnership-card" *ngFor="let partner of partnerships; let i = index">
@@ -33,17 +52,16 @@
       <p>No partnerships available at the moment.</p>
     </div>
 
-    <!-- NEW: Become a partner callout -->
+    <!-- Partner CTA -->
     <div class="partner-cta">
       <div class="partner-cta-content">
         <h3>🤝 Become a Partner</h3>
         <p>
           We invite healthcare institutions, NGOs, corporate sponsors, and mission-aligned
           organizations to join us in scaling sustainable nutrition programs across Africa.
-          Your partnership directly improves lives.
         </p>
         <p class="partner-cta-small">
-          📧 <strong>partnerships@nutriomedics.com</strong> &nbsp;|&nbsp;
+          📧 <strong>info@nutriomedics.co.tz</strong> &nbsp;|&nbsp;
           🔗 <a href="/contact" class="partner-link">Submit an interest form</a>
         </p>
       </div>
