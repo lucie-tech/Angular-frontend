@@ -10,7 +10,7 @@
   width: 100%;
 }
 
-/* Header styles */
+/* Header */
 .partnership-header {
   max-width: 600px;
   margin: 0 auto 3rem;
@@ -50,11 +50,11 @@
   line-height: 1.7;
 }
 
-/* Two‑column row: image + text */
+/* Two‑column row – equal height image + text */
 .partnership-row {
   display: flex;
   gap: 2.5rem;
-  align-items: center;
+  align-items: stretch; // makes both columns equal height
   margin-bottom: 4rem;
   flex-wrap: wrap;
 }
@@ -62,22 +62,25 @@
 .partnership-image-wrap {
   flex: 1.2;
   min-width: 200px;
-  line-height: 0;
-  /* ← kills extra space below image */
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 15px 35px rgba(8, 80, 65, 0.12);
   background: #f0faf6;
+  display: flex; // allows image to fill height
 
   img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover; // crops to fill without distortion
     display: block;
   }
 }
 
 .partnership-intro-text {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; // vertically centers text inside column
 
   h3 {
     font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
@@ -95,17 +98,20 @@
   }
 }
 
-/* Responsive: stack on smaller screens */
+/* Responsive: stack on mobile */
 @media (max-width: 800px) {
   .partnership-row {
     flex-direction: column;
+    align-items: center;
     gap: 1.5rem;
   }
 
   .partnership-image-wrap {
     width: 100%;
     max-width: 500px;
-    margin: 0 auto;
+    min-height: auto;
+    // remove forced height so image uses its natural aspect ratio on mobile
+    height: auto;
   }
 
   .partnership-intro-text {
@@ -139,7 +145,7 @@
   }
 }
 
-/* Error + retry button */
+/* Error + retry */
 .error {
   text-align: center;
   padding: 2rem;
@@ -177,7 +183,7 @@
   border: 1px dashed rgba(8, 80, 65, 0.12);
 }
 
-/* Partnership cards (dynamic grid) */
+/* Dynamic partnerships grid */
 .partnership-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -277,7 +283,7 @@
   }
 }
 
-/* Responsive adjustments */
+/* Responsive fine-tuning */
 @media (max-width: 768px) {
   #partnerships {
     padding: 3rem 1rem;

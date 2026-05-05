@@ -43,6 +43,9 @@ export class BlogComponent implements OnInit, OnDestroy {
   showDocumentModal = false;
   pdfUrl: string | null = null;
 
+  // Read more state
+  expandedPosts = new Set<string>();
+
   constructor(
     private blogService: BlogService,
     private faqService: FAQService,
@@ -139,6 +142,38 @@ export class BlogComponent implements OnInit, OnDestroy {
 
   toggleFaq(index: number): void {
     this.faqs[index].active = !this.faqs[index].active;
+  }
+
+  // Read more methods
+  isPostExpanded(postId: string): boolean {
+    return this.expandedPosts.has(postId);
+  }
+
+  toggleReadMore(postId: string): void {
+    if (this.expandedPosts.has(postId)) {
+      this.expandedPosts.delete(postId);
+    } else {
+      this.expandedPosts.add(postId);
+    }
+    this.cdr.detectChanges();
+  }
+
+  getTruncatedContent(content: string): string {
+    const maxLength = 500; // Adjust this value as needed
+    if (!content) return '';
+    if (content.length <= maxLength) return content;
+    // Find a natural break (space) near the limit
+    let truncated = content.substring(0, maxLength);
+    const lastSpace = truncated.lastIndexOf(' ');
+    if (lastSpace > 0) {
+      truncated = truncated.substring(0, lastSpace);
+    }
+    return truncated + '...';
+  }
+
+  needsTruncation(content: string): boolean {
+    if (!content) return false;
+    return content.length > 500; // Must match maxLength above
   }
 
   ngOnDestroy(): void {

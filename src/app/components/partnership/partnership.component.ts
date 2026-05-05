@@ -36,7 +36,7 @@ export class PartnershipComponent implements OnInit {
       const data = await firstValueFrom(
         this.partnerService.getAll().pipe(
           take(1),
-          timeout(8000) 
+          timeout(8000) // prevents infinite hanging
         )
       );
       this.partnerships = data.filter(p => p.isActive);
